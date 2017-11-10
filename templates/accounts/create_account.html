@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block breadcrumb %}
-  <ol class="breadcrumb">
+<h3 align="center">
+<ol class="breadcrumb">
     <li><a href="{%  url 'accounts:list' %}">Accounts</a></li>
     <li class="active">Create</li>
-  </ol>
+  </ol></h3>
 {% endblock %}
 {% block content %}
   <form id="formid" action='' method="POST" novalidate>{% csrf_token %}
@@ -160,12 +161,12 @@
       <input type="hidden" id="save_new_form" name="savenewform">
     </div>
     <!-- overview ends here -->
-    <div class="row marl buttons_row text-center">
-      <button class="btn btn-default save" type="submit">Save</button>
+    <div class="row marl text-center">
+      <button class="btn btn-primary" type="submit">Save</button>
       {% if not account_obj %}
-        <button class="btn btn-success save savenew" type="submit">Save & New</button>
+        <button class="btn btn-success" type="submit">Save & New</button>
       {% endif %}
-      <a href="{% url 'accounts:list' %}" class="btn btn-default">CANCEL</a>
+      <botton href="{% url 'accounts:list' %}" class="btn btn-default">Cancel</botton>
     </div>
   </form>
 {% endblock %}
