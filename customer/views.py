@@ -2,18 +2,20 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+
+from common.models import User, Address, Comment, Team
+from common.forms import BillingAddressForm
+from common.utils import COUNTRIES
+from accounts.models import Account
+from customer.models import Customer
+from customer.forms import CustomerForm,CustomerCommentForm
+
+from contacts.forms import ContactForm
+from common.utils import LEAD_STATUS, LEAD_SOURCE, INDCHOICES, TYPECHOICES, COUNTRIES
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import modelformset_factory
-
-from customer.models import Customer
-from contacts.forms import ContactForm
-from common.models import User, Address, Comment, Team
-from common.utils import LEAD_STATUS, LEAD_SOURCE, INDCHOICES, TYPECHOICES, COUNTRIES
-from customer.forms import CustomerForm
 from accounts.forms import AccountForm
-from common.forms import BillingAddressForm
-from accounts.models import Account
 from planner.models import Event, Reminder
 from planner.forms import ReminderForm
 
@@ -26,17 +28,21 @@ def customer_list(request):
     page = request.POST.get('per_page')
     first_name = request.POST.get('first_name')
     last_name = request.POST.get('last_name')
-    #city = request.POST.get('city')
+    city = request.POST.get('city')
+    phone = request.POST.get('phone')
     email = request.POST.get('email')
+
     if first_name:
-        lead_obj = Lead.objects.filter(first_name__icontains=first_name)
+        customer_obj = customer_obj.filter(first_name__icontains=first_name)
     if last_name:
-        lead_obj = Lead.objects.filter(last_name__icontains=last_name)
-    #if city:
-    #    lead_obj = Lead.objects.filter(address=Address.objects.filter
-    #                                   (city__icontains=city))
+        customer_obj = customer_obj.filter(last_name__icontains=last_name)
+    if city:
+        customer_obj = customer_obj.filter(address=Address.objects.filter
+                                       (city__icontains=city))
+    if phone:
+        customer_obj = customer_obj.filter(phone_icontains=phone)
     if email:
-        lead_obj = Lead.objects.filter(email__icontains=email)
+        customer_obj = customer_obj.filter(email__icontains=email)
 
     return render(request, 'customers/customers.html', {
         'customer_obj': customer_obj, 'per_page': page})
@@ -76,3 +82,6 @@ def add_customer(request):
     else:
         return render(request, 'customers/create_customer.html', {
                       'customer_form': form})
+
+
+
