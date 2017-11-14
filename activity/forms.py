@@ -15,7 +15,7 @@ class ActivityForm(forms.ModelForm):
         #self.fields['assigned_to'].required = False
         #self.fields['teams'].required = False
         #self.fields['phone'].required = False
-        #elf.fields['first_name'].widget.attrs.update({
+        #self.fields['first_name'].widget.attrs.update({
     #        'placeholder': 'First Name'})
     #    self.fields['last_name'].widget.attrs.update({
     #        'placeholder': 'Last Name'})
