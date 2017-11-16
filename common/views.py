@@ -4,8 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout, authenticate, login
 from common.forms import *
-from django.contrib.auth.models import User
-
+from common.models import *
 
 
 @login_required
@@ -30,16 +29,18 @@ def login_crm(request):
 
 def register_page(request):
     if request.method == 'POST':
-        form = reg_form(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(
                 username=form.cleaned_data['username'],
                 password=form.cleaned_data['password1'],
-                email=form.cleaned_data['email']
+                email=form.cleaned_data['email'],
             )
+            user.is_staff = form.cleaned_data['is_staff']
+            user.save()
             return HttpResponseRedirect('/')
     else:
-        form = reg_form()
+        form = UserCreationForm()
     variables = {
         'form': form
     }
