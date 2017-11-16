@@ -37,6 +37,7 @@ def register_page(request):
                 email=form.cleaned_data['email'],
             )
             user.is_staff = form.cleaned_data['is_staff']
+            user.is_admin = form.cleaned_data['is_staff']
             user.save()
             return HttpResponseRedirect('/')
     else:

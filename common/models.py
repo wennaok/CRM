@@ -51,6 +51,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __unicode__(self):
         return self.email
 
+    def has_perm(self, perm, obj=None):
+        if User.is_admin:
+            return True
+        else:
+            return False
+
+    def has_module_perms(self, app_label):
+        if User.is_admin:
+            return True
+        else:
+            return False
+
+
 
 class Address(models.Model):
     address_line = models.CharField(_("Address"), max_length=255, blank=True, null=True)
