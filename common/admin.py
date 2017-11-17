@@ -1,11 +1,8 @@
 from django.contrib import admin
-from django import forms
+from common.forms import *
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from common.models import User, Address, Team, Comment, Comment_Files
-from common.forms import *
-# Register your models here.
-
 
 
 class UserAdmin(BaseUserAdmin):
@@ -36,9 +33,10 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 # Now register the new UserAdmin...
-admin.site.register(User, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
+
+admin.site.register(User)
 admin.site.unregister(Group)
 admin.site.register(Address)
 admin.site.register(Team)

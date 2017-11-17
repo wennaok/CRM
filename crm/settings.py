@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
     'common',
     'accounts',
     'cases',
@@ -39,8 +38,8 @@ INSTALLED_APPS = [
     'oppurtunity',
     'planner',
     'organizations',
-    'customer',
     'simple_pagination',
+	
     #'simple_history',
 ]
 

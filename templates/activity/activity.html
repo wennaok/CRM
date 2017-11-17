@@ -62,21 +62,19 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading-list text-center">
-          LIST OF Activities
+          LIST OF ACTIVITIES
           <span class="pull-right total_count">{% if show_pageitems %} {% show_pageitems %}{% else %}Total Activities {{ activity_obj|length }}{% endif %}</span>
         </div>
         <div class="panel-content">
           <table class="table table-bordered table-striped table-condensed">
             <thead>
               <tr>
-                <th width="5%" style="text-align:center;">S.No</th>
-                <th width="20%" style="text-align:center;">NAME</th>
-                <th width="15%" style="text-align:center;">ORGANIZATION</th>
+                <th width="15%" style="text-align:center;">S.No</th>
+                <th width="25%" style="text-align:center;">NAME</th>
                 <th width="15%" style="text-align:center;">STATUS</th>
                 <!-- <th width="20%" style="text-align:center;">ASSIGNED USER</th> -->
-                <th width="15%" style="text-align:center;">START DATE</th>
-                <th width="15%" style="text-align:center;">END DATE</th>
-
+                <th width="15%" style="text-align:center;">CREATED ON</th>
+                <th width="30%" style="text-align:center;">ORGANIZATION</th>
               </tr>
             </thead>
             <tbody>
@@ -89,10 +87,14 @@
               <tr class="text-center">
                 <td scope="row">{{ forloop.counter }}</td>
                 <td><a >{{ activity.Name }}</a></td>
-                <td>{{ activity.org }}</td>
                 <td>{{ activity.status }}</td>
-                <td>{{ activity.startdate }}</td>
-                <td>{{ activity.enddate }}</td>
+                <td>{{ activity.created_on }}</td>
+                <td>{{ activity.org }}</td>
+                <td>
+                  <a class="btn btn-info">View</a>
+                  <a class="btn btn-success">Edit</a>
+                  <a class="btn btn-danger">Delete</a>
+                </td>
               </tr>
               {% endfor %}
             </tbody>

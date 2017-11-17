@@ -15,7 +15,7 @@ class ActivityForm(forms.ModelForm):
         #self.fields['assigned_to'].required = False
         #self.fields['teams'].required = False
         #self.fields['phone'].required = False
-        #self.fields['first_name'].widget.attrs.update({
+        #elf.fields['first_name'].widget.attrs.update({
     #        'placeholder': 'First Name'})
     #    self.fields['last_name'].widget.attrs.update({
     #        'placeholder': 'Last Name'})
@@ -24,6 +24,6 @@ class ActivityForm(forms.ModelForm):
 
     class Meta:
         model = Activity
-        fields = ('org', 'assigned_to','email', 'startdate', 'enddate', 'created_by', 'activity_type',
-                  'description','Name','status'
+        fields = ('assigned_to','email', 'startdate', 'enddate', 'created_by', 'activity_type',
+                  'description','name','status'
                   )
