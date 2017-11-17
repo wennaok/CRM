@@ -1,6 +1,7 @@
 from django import forms
 from organizations.models import Organization
-from common.models import Address, Comment
+from common.models import Comment
+
 
 class OrganizationForm(forms.ModelForm):
 
@@ -9,18 +10,11 @@ class OrganizationForm(forms.ModelForm):
         super(OrganizationForm, self).__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs = {"class": "form-control"}
-        #if self.data.get('status') == 'converted':
-        #    self.fields['account_name'].required = True
+        self.fields['description'].widget.attrs.update({
+            'rows': '8'})
         self.fields['assigned_to'].queryset = assigned_users
         self.fields['assigned_to'].required = False
-        #self.fields['teams'].required = False
-        self.fields['phone'].required = False
-        self.fields['name'].widget.attrs.update({
-            'placeholder': 'name'})
-        #self.fields['Name'].widget.attrs.update({
-            #'placeholder': 'Name'})
-        #self.fields['account_name'].widget.attrs.update({
-        #    'placeholder': 'Account Name'})
+
 
     class Meta:
         model = Organization
@@ -39,3 +33,11 @@ class OrganizationForm(forms.ModelForm):
             except (ValueError):
                 raise forms.ValidationError('Phone Number should contain only Numbers')
             return client_phone
+
+
+#class OrganizationCommentForm(forms.ModelForm):
+    #comment = forms.CharField(max_length=64, required=True)
+
+    #class Meta:
+        #model = Comment
+        #fields = ('comment', 'organization', 'commented_by')
