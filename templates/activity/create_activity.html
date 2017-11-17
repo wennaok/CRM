@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block breadcrumb %}
-<h3 align="center">
-<ol class="breadcrumb">
+  <ol class="breadcrumb">
     <li><a href="{% url 'activity:list' %}">Activity</a></li>
     <li class="active">Create</li>
-</ol></h3>
+  </ol>
 {% endblock %}
 {%block content%}
   <form id="add_form" method="POST" action="" novalidate>{%csrf_token%}
@@ -96,10 +95,10 @@
       </div>
       <input type="hidden" id="save_new_form" name="savenewform">
     </div>
-    <div class="row marl text-center">
-      <button  class="btn btn-primary" type="submit">Save</button>
+    <div class="row marl buttons_row text-center">
+      <button  class="btn btn-default save" type="submit">Save</button>
       {% if not activity_obj %}
-        <button class="btn btn-success " type="submit">Save & New</button>
+        <button class="btn btn-success save savenew" type="submit">Save & New</button>
       {% endif %}
       <a href="{% url 'activity:list' %}" class="btn btn-default" id="create_activity_cancel">Cancel</a>
     </div>
