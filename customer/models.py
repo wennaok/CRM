@@ -17,14 +17,12 @@ class Customer(models.Model):
     org = models.ForeignKey(Organizations, related_name='Customer', on_delete=models.CASCADE, blank=True, null=True)
     email = models.EmailField()
     activity=models.ForeignKey(Activity, related_name='+' ,on_delete=models.CASCADE, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    phone = models.CharField(max_length=20, null=True, blank=True)
     #startdate=models.DateTimeField(_("Start date"), auto_now_add=True)
     #nddate=models.DateTimeField(_("End date"), auto_now_add=True)
     #created_by = models.ForeignKey(User, related_name='activity_created_by', on_delete=models.CASCADE)
     #activity_type= models.CharField(_("Activity Type"), max_length=255, blank=True, null=True, choices=ACTIVITY_TYPE)
-    description = models.TextField(blank=True, null=True)
-
-
-    phone = models.CharField(max_length=20, null=True, blank=True)
     #account = models.ForeignKey(Account, related_name='Organizations', on_delete=models.CASCADE, blank=True, null=True)
     #status = models.CharField(_("Status of Activity"), max_length=255,
                               #blank=True, null=True, choices=LEAD_STATUS)
