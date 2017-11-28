@@ -12,7 +12,6 @@
       </div>
       <div class="col-md-6">
         <div class="create_new text-right">
-
           <a href="{% url 'activity:add_activity' %}"><i class="fa fa-plus"></i> Add New Activity</a>
         </div>
       </div>
@@ -30,7 +29,7 @@
             <div class="filter_col col-md-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
-                <input type="text" class="form-control" placeholder="Name" name="Name" value="{{request.POST.Name}}">
+                <input type="text" class="form-control" placeholder="Name" id="id_name" name="name" {% if request.POST %} value="{{request.POST.name}}" {% endif %}>
               </div>
             </div>
             <div class="filter_col col-md-4">
@@ -73,7 +72,7 @@
                 <th width="25%" style="text-align:center;">NAME</th>
                 <th width="15%" style="text-align:center;">STATUS</th>
                 <!-- <th width="20%" style="text-align:center;">ASSIGNED USER</th> -->
-                <th width="15%" style="text-align:center;">CREATED ON</th>
+                <th width="15%" style="text-align:center;">START DATE</th>
                 <th width="30%" style="text-align:center;">ORGANIZATION</th>
               </tr>
             </thead>
@@ -86,14 +85,14 @@
               {% for activity in activity_obj %}
               <tr class="text-center">
                 <td scope="row">{{ forloop.counter }}</td>
-                <td><a >{{ activity.Name }}</a></td>
+                <td><a >{{ activity.name }}</a></td>
                 <td>{{ activity.status }}</td>
-                <td>{{ activity.created_on }}</td>
+                <td>{{ activity.startdate }}</td>
                 <td>{{ activity.org }}</td>
                 <td>
                   <a class="btn btn-info">View</a>
-                  <a class="btn btn-success">Edit</a>
-                  <a class="btn btn-danger">Delete</a>
+                  <a href="{% url 'activities:edit_activity' activity.id%}" class="btn btn-success">Edit</a>
+                  <a href="{% url 'activities:remove_activity' activity.id %}" class="btn btn-danger delete">Delete</a>
                 </td>
               </tr>
               {% endfor %}
